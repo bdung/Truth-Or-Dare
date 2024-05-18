@@ -31,17 +31,16 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     readJsonFile();
-    _showMessageDialog(BuildContext context) => showDialog(
+    showMessageDialog(BuildContext context) => showDialog(
         context: context,
         builder: (context) => AlertDialog(
               backgroundColor: kPrimaryColor.withOpacity(0.8),
-              title: Text(
+              title: const Text(
                 'Thêm chủ đề mới',
                 style: TextStyle(color: kTextWhiteColor),
               ),
-              content: Expanded(
-                  child: Container(
-                padding: EdgeInsets.only(
+              content: Container(
+                padding: const EdgeInsets.only(
                     left: kDefaultPadding / 2, right: kDefaultPadding / 2),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
@@ -49,24 +48,20 @@ class _HomeScreenState extends State<HomeScreen> {
                   boxShadow: [
                     BoxShadow(
                       color: kColorHidden.withOpacity(0.2),
-                      offset: Offset(0, 4),
+                      offset: const Offset(0, 4),
                       blurRadius: 4,
                     ),
                   ],
                 ),
-                child: TextField(
+                child: const TextField(
                   scrollPadding: EdgeInsets.all(kDefaultPadding / 2),
                   enabled: true,
                   cursorColor: kButtonColor,
                 ),
-              )),
+              ),
               actions: [
                 Center(
                   child: ElevatedButton(
-                    child: Text(
-                      'Thêm mới',
-                      style: TextStyle(color: kTextWhiteColor),
-                    ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: kButtonColor,
                       textStyle: const TextStyle(
@@ -75,6 +70,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           borderRadius: BorderRadius.all(Radius.circular(15))),
                     ),
                     onPressed: () => Navigator.of(context).pop(),
+                    child: const Text(
+                      'Thêm mới',
+                      style: TextStyle(color: kTextWhiteColor),
+                    ),
                   ),
                 )
               ],
@@ -83,11 +82,11 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          SizedBox(
+          const SizedBox(
             height: 50,
           ),
           Container(
-            padding: EdgeInsets.only(right: 10, left: 10),
+            padding: const EdgeInsets.only(right: 10, left: 10),
             alignment: Alignment.center,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
@@ -95,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
               boxShadow: [
                 BoxShadow(
                   color: kColorHidden.withOpacity(0.2),
-                  offset: Offset(0, 4),
+                  offset: const Offset(0, 4),
                   blurRadius: 4,
                 ),
               ],
@@ -104,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.arrow_back,
                     color: kButtonColor,
                   ),
@@ -112,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.pop(context);
                   },
                 ),
-                Text(
+                const Text(
                   "Truth or Dare",
                   style: TextStyle(
                       color: kTextLightColor,
@@ -121,12 +120,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       fontWeight: FontWeight.bold),
                 ),
                 IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.add,
                     color: kButtonColor,
                   ),
                   onPressed: () {
-                    _showMessageDialog(context);
+                    showMessageDialog(context);
                   },
                 ),
               ],
@@ -138,19 +137,13 @@ class _HomeScreenState extends State<HomeScreen> {
               itemBuilder: ((context, index) {
                 return Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     SizedBox(
                         width: MediaQuery.sizeOf(context).width * 0.8,
                         height: MediaQuery.sizeOf(context).height * 0.2,
                         child: ElevatedButton(
-                            child: Text(
-                              allDatas[index].title.toString(),
-                              style: TextStyle(
-                                  color: kTextWhiteColor,
-                                  fontFamily: defaultFontFamily),
-                            ),
                             onPressed: () {
                               Navigator.push(
                                   context,
@@ -165,6 +158,12 @@ class _HomeScreenState extends State<HomeScreen> {
                               shape: const RoundedRectangleBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(15))),
+                            ),
+                            child: Text(
+                              allDatas[index].title.toString(),
+                              style: const TextStyle(
+                                  color: kTextWhiteColor,
+                                  fontFamily: defaultFontFamily),
                             ))),
                   ],
                 );
