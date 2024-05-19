@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../../../constant.dart';
 
-class DialogQuestion extends StatefulWidget{
-  final String question;
+class DialogError extends StatefulWidget{
   final String type;
 
-  const DialogQuestion({super.key, required this.question, required this.type});
+  const DialogError({super.key, required this.type});
   @override
-  State<StatefulWidget> createState() => _DialogQuestion();
+  State<StatefulWidget> createState() => _DialogError();
 
 }
-class _DialogQuestion extends State<DialogQuestion>{
+class _DialogError extends State<DialogError>{
 
   @override
   Widget build(BuildContext context) {
@@ -21,15 +20,15 @@ class _DialogQuestion extends State<DialogQuestion>{
       children: [
         AlertDialog(
           backgroundColor: kPrimaryColor.withOpacity(0.8),
-          title: Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),child: Center(child: Text(widget.type, style: const TextStyle(color: kTextWhiteColor,fontWeight: FontWeight.bold),))),
+          title: Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),child: const Center(child: Text('ERROR!', style: TextStyle(color: kTextWhiteColor,fontWeight: FontWeight.bold),))),
           content: SizedBox(
-            height: MediaQuery.of(context).size.height/5,
+            height: MediaQuery.of(context).size.height/8,
             width: MediaQuery.of(context).size.width*3/4,
             child: Padding(
               padding: const EdgeInsets.only(bottom: kDefaultPadding),
-              child: SingleChildScrollView(
-                child: Text(widget.question, style: const TextStyle(fontWeight: FontWeight.bold, color: kTextWhiteColor),),
-              ),
+              child: Center(
+                child: Text('Danh sách câu hỏi đang trống, bạn vui lòng tạo các câu hỏi cho danh mục ${widget.type}.', style: const TextStyle(fontWeight: FontWeight.bold, color: kTextWhiteColor),),
+              )
             ),
 
           ),
@@ -47,7 +46,7 @@ class _DialogQuestion extends State<DialogQuestion>{
             ),
             onPressed: () => Navigator.of(context).pop(),
             child: const Text(
-              'TIẾP TỤC',
+              'OKE',
               style: TextStyle(color: kTextWhiteColor),
             ),
           ),

@@ -1,20 +1,54 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 import '../../constant.dart';
+import '../../models/question_models.dart';
+import 'components/dialog_erro.dart';
 import 'components/dialog_question.dart';
 
 class PlayingScreen extends StatelessWidget{
-  showQuestionDialog(BuildContext context) => showDialog(
+  final Data? data;
+  final String ?topic;
+
+  const PlayingScreen({super.key, required this.data, required this.topic});
+
+
+  String? randomList(Data listData, String type){
+    Random random = Random();
+
+    if(type == 'Truth'){
+      do{
+        int randomNumber = random.nextInt(data!.truth!.length);
+        if(listData.truth?[randomNumber].state??false) {
+          return listData.truth![randomNumber].name;
+        }
+      }
+      while(true);
+    }
+    else{
+      do{
+        int randomNumber = random.nextInt(data!.dare!.length);
+        if(listData.dare?[randomNumber].state??false) {
+          return listData.dare![randomNumber].name;
+        }
+      }
+      while(true);
+    }
+  }
+  showQuestionDialog_truth(BuildContext context) => showDialog(
       context: context,
-      builder: (context) => DialogQuestion());
+      builder: (context) => DialogQuestion(question: randomList(data!, 'Truth')!, type: 'Truth',));
+
+  showQuestionDialog_dare(BuildContext context) => showDialog(
+      context: context,
+      builder: (context) => DialogQuestion(question: randomList(data!, 'Dare')!,type: 'Dare',));
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 50,
           ),
           Container(
@@ -43,17 +77,15 @@ class PlayingScreen extends StatelessWidget{
                     Navigator.pop(context);
                   },
                 ),
-                Container(
-                  child: const Text(
-                    "Danh sách câu hỏi",
-                    style: TextStyle(
-                        color: kTextLightColor,
-                        fontFamily: defaultFontFamily,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  ),
+                const Text(
+                  "Danh sách câu hỏi",
+                  style: TextStyle(
+                      color: kTextLightColor,
+                      fontFamily: defaultFontFamily,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 30,
                 )
               ],
@@ -66,12 +98,12 @@ class PlayingScreen extends StatelessWidget{
             padding: const EdgeInsets.only(top: kDefaultPadding*2),
             child: Container(
               height: MediaQuery.of(context).size.height/20,
-              width: MediaQuery.of(context).size.width/2,
+              width: MediaQuery.of(context).size.width*0.5,
               decoration: BoxDecoration(
                 color: kButtonColor,
                 borderRadius: BorderRadius.circular(10)
               ),
-              child: Center(child: Text('Mới quen', style: TextStyle(color: kTextWhiteColor,fontWeight: FontWeight.bold, fontSize: 20),)),
+              child: Center(child: Text('${topic}', style: TextStyle(color: kTextWhiteColor,fontWeight: FontWeight.bold, fontSize: 20),overflow: TextOverflow.ellipsis,)),
             ),
           ),
 
@@ -88,20 +120,27 @@ class PlayingScreen extends StatelessWidget{
                             borderRadius: BorderRadius.all(Radius.circular(15))),
                       ),
                       onPressed: (){
-                        showQuestionDialog(context);
+                        if(data!.truth!.length!=0){
+                          showQuestionDialog_truth(context);
+                        }
+                        else{
+                          showDialog(
+                              context: context,
+                              builder: (context) => const DialogError(type: 'Truth',));
+                        }
                       },
-                      child: SizedBox(
+                      child: const SizedBox(
                         height: 60,
                         width: 200,
                         child: Center(
-                          child: const Text(
+                          child: Text(
                             'Truth ',
                             style: TextStyle(color: kTextWhiteColor),
                           ),
                         ),
                       )
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 80,
                   ),
                   ElevatedButton(
@@ -113,13 +152,20 @@ class PlayingScreen extends StatelessWidget{
                             borderRadius: BorderRadius.all(Radius.circular(15))),
                       ),
                       onPressed: (){
-                        showQuestionDialog(context);
+                        if(data!.dare!.length !=0) {
+                          showQuestionDialog_dare(context);
+                        }
+                        else{
+                          showDialog(
+                              context: context,
+                              builder: (context) => DialogError(type: 'Dare',));
+                        }
                       },
-                      child: SizedBox(
+                      child: const SizedBox(
                         height: 60,
                         width: 200,
                         child: Center(
-                          child: const Text(
+                          child: Text(
                             'Dare',
                             style: TextStyle(color: kTextWhiteColor),
                           ),

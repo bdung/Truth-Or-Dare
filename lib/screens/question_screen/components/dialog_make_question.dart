@@ -2,15 +2,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constant.dart';
+import '../../../models/question_models.dart';
 
 class DialogMakeQuestion extends StatefulWidget{
+  final Data data;
+  final Future<void> Function(String question, bool checkbox_1, bool checkbox_2, Data data) insertQuestion;
+
+  const DialogMakeQuestion({super.key, required this.data, required this.insertQuestion});
   @override
   State<StatefulWidget> createState() => _DialogMakeQuestionState();
 
 }
 class _DialogMakeQuestionState extends State<DialogMakeQuestion>{
-  bool isChecked_1 = false;
+  bool isChecked_1 = true;
   bool isChecked_2 = false;
+  final TextEditingController _question = TextEditingController();
 
 
   void toggleCheckbox_1(bool? value) {
@@ -31,7 +37,7 @@ class _DialogMakeQuestionState extends State<DialogMakeQuestion>{
     return AlertDialog(
       backgroundColor: kPrimaryColor.withOpacity(0.8),
       content: Container(
-        height: MediaQuery.of(context).size.height/3,
+        height: MediaQuery.of(context).size.height/4,
         width: MediaQuery.of(context).size.width*3/4,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,7 +80,8 @@ class _DialogMakeQuestionState extends State<DialogMakeQuestion>{
                   ),
                 ],
               ),
-              child:const TextField(
+              child: TextField(
+                controller: _question,
                 scrollPadding: EdgeInsets.all(kDefaultPadding / 2),
                 enabled: true,
                 cursorColor: kButtonColor,
@@ -90,7 +97,10 @@ class _DialogMakeQuestionState extends State<DialogMakeQuestion>{
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(15))),
                 ),
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: (){
+                  widget.insertQuestion(_question.text, isChecked_1, isChecked_2, widget.data);
+                  Navigator.of(context).pop();
+                },
                 child: const Text(
                   'Thêm câu hỏi',
                   style: TextStyle(color: kTextWhiteColor),

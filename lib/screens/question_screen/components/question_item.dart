@@ -2,9 +2,16 @@
 import 'package:flutter/material.dart';
 
 import '../../../constant.dart';
+import '../../../models/question_models.dart';
 
 class QuestionItem extends StatefulWidget{
-  const QuestionItem({super.key});
+
+  final int idItem;
+  final Dare? dare;
+  final Truth? truth;
+  final Future<void> Function(String type, int idItem) deleteItem;
+
+  const QuestionItem({super.key, this.dare, this.truth, required this.deleteItem, required this.idItem});
 
   @override
   State<StatefulWidget> createState() => _QuestionItemState();
@@ -23,12 +30,18 @@ class _QuestionItemState extends State<QuestionItem> {
           children: [
             Expanded(
                 flex: 10,
-                child: const Text('Thực hiện hít đất 10 cáiThực hiện hít đất 10 cáiThực hiện hít đất 10 cáiThực hiện hít đất 10 cáiThực hiện hít đất 10 cáiThực hiện hít đất 10 cái \n Thực hiện hít đất 10 cái \n Thực hiện hít đất 10 cái \n Thực hiện hít đất 10 cái \n Thực hiện hít đất 10 cái \n Thực hiện hít đất 10 cái \n Thực hiện hít đất 10 cái \n ', style: TextStyle(color: kTextLightColor),)),
+                child: Text('${widget.dare!=null ? widget.dare!.name : widget.truth!.name}', style: TextStyle(color: kTextLightColor),)),
             Expanded(
               flex: 1,
               child: GestureDetector(
                 onTap: (){
-                  print('oke');
+                  print('ok');
+                  if(widget.truth != null) {
+                    widget.deleteItem( 'truth', widget.idItem);
+                  }
+                  else{
+                    widget.deleteItem( 'dare', widget.idItem);
+                  }
                 },
                 child: const Icon(
                   Icons.delete,

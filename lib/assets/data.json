@@ -1,140 +1,165 @@
 {
-	"Data": [
-	  {
-		"id": 1,
-		  "title": "Mới quen",
-		  "dare": [
-			{
-			  "id" : 1,
-			  "name": "Thực hiện 100 lần squat."
-			},
-			{
-			  "id" : 2,
-			  "name": "Nhảy không nhạc trong 1 phút."
-			},
-			{
-			  "id" : 3,
-			  "name": "Nói hai điều trung thực về những người khác trong nhóm"
-			},
-			{
-			  "id" : 4,
-			  "name": "Hôn người bên trái của bạn."
-			},
-			{
-			  "id" : 5,
-			  "name": "Để người ở bên phải bạn dùng bút vẽ lên khuôn mặt của bạn."
-			},
-			{
-			  "id" : 6,
-			  "name": "Để ai đó cạo một phần cơ thể của bạn."
-			}
-			,
-			{
-			  "id" : 7,
-			  "name": "Gọi điện cho crush gần nhất và hát 1 đoạn cho họ nghe"
-			}
-			,
-			{
-			  "id" : 8,
-			  "name": "Nhắn tin cho ai đó, bạn đã không nói chuyện trong một năm và gửi cho tôi ảnh chụp màn hình"
-			}
-			,
-			{
-			  "id" : 9,
-			  "name": "Tất cả mọi người hỏi 1 câu và bạn chỉ trả lời có."
-			}
-			,
-			{
-			  "id" : 10,
-			  "name": "La lớn tôi bị điên 3 tiếng"
-			}
-		  ],
-		  "truth": [
-			{
-			  "id" : 1,
-			  "name": "Bí mật mà bạn chưa từng nói với ai?"
-			},
-			{
-			  "id" : 2,
-			  "name": "Điều gì bạn vui mừng mà mẹ bạn không biết về bạn?"
-			},
-			{
-			  "id" : 3,
-			  "name": "Đâu là nơi kỳ lạ nhất mà bạn từng đi vệ sinh? "
-			},
-			{
-			  "id" : 4,
-			  "name": "Bạn sẽ làm gì nếu bạn là người khác giới trong một tuần?"
-			},
-			{
-			  "id" : 5,
-			  "name": "Điều điên rồ nhất bạn đã làm trên phương tiện giao thông công cộng là gì?"
-			},
-			{
-			  "id" : 6,
-			  "name": "Trong số tất cả những người trong phòng, bạn sẽ đồng ý hẹn hò với chàng trai/cô gái nào? "
-			},
-			{
-			  "id" : 7,
-			  "name": "Gọi tên một người mà bạn hối hận vì đã hôn."
-			}
-		  ]
-	},
-	{
-	  "id": 2,
-		"title": "Nghịch ngợm",
-		"dare": [
-		  {
-			"id" : 1,
-			"name": "Trao đổi một mặt hàng quần áo với người chơi ở bên phải của bạn."
-		  },
-		  {
-			"id" : 2,
-			"name": "Tập plank trong một phút."
-		  },
-		  {
-			"id" : 3,
-			"name": "Ngửi bàn chân trần của người chơi khác."
-		  },
-		  {
-			"id" : 4,
-			"name": "Chọn một người nào đó trong nhóm để đánh đòn cho bạn"
-		  },
-		  {
-			"id" : 5,
-			"name": "Mở Instagram hoặc Facebook của bạn và thích từng bài đăng của người yêu cũ."
-		  },
-		  {
-			"id" : 6,
-			"name": "ãy thực hiện tư thế yoga kỳ lạ nhất mà bạn từng thực hiện."
-		  }
-		],
-		"truth": [
-		  {
-			"id" : 1,
-			"name": "Bạn có một biệt danh thời thơ ấu đáng xấu hổ?"
-		  },
-		  {
-			"id" : 2,
-			"name": "Bạn đã có một khoảnh khắc xấu hổ trước trường học?"
-		  },
-		  {
-			"id" : 3,
-			"name": "hhhhhhhh"
-		  },
-		  {
-			"id" : 4,
-			"name": "hhhhhhhh"
-		  },
-		  {
-			"id" : 5,
-			"name": "hhhhhhhh"
-		  },
-		  {
-			"id" : 6,
-			"name": "hhhhhhhh"
-		  }
-		]
-  }
-	]
-  }
+  "Data": [
+    {
+      "id": 0,
+      "title": "Mới quen",
+      "dare": [
+        {
+          "id": 0,
+          "name": "Thực hiện 100 lần squat.",
+          "state": false
+        },
+        {
+          "id": 1,
+          "name": "Nhảy không nhạc trong 1 phút.",
+          "state": true
+        },
+        {
+          "id": 2,
+          "name": "Nói hai điều trung thực về những người khác trong nhóm",
+          "state": true
+        },
+        {
+          "id": 3,
+          "name": "Hôn người bên trái của bạn.",
+          "state": true
+        },
+        {
+          "id": 4,
+          "name": "Để người ở bên phải bạn dùng bút vẽ lên khuôn mặt của bạn.",
+          "state": true
+        },
+        {
+          "id": 5,
+          "name": "Để ai đó cạo một phần cơ thể của bạn.",
+          "state": true
+        },
+        {
+          "id": 6,
+          "name": "Gọi điện cho crush gần nhất và hát 1 đoạn cho họ nghe",
+          "state": true
+        },
+        {
+          "id": 7,
+          "name": "Nhắn tin cho ai đó, bạn đã không nói chuyện trong một năm và gửi cho tôi ảnh chụp màn hình",
+          "state": true
+        },
+        {
+          "id": 8,
+          "name": "Tất cả mọi người hỏi 1 câu và bạn chỉ trả lời có.",
+          "state": true
+        },
+        {
+          "id": 9,
+          "name": "La lớn tôi bị điên 3 tiếng",
+          "state": true
+        }
+      ],
+      "truth": [
+        {
+          "id": 0,
+          "name": "Bí mật mà bạn chưa từng nói với ai?",
+          "state": true
+        },
+        {
+          "id": 1,
+          "name": "Điều gì bạn vui mừng mà mẹ bạn không biết về bạn?",
+          "state": true
+        },
+        {
+          "id": 2,
+          "name": "Đâu là nơi kỳ lạ nhất mà bạn từng đi vệ sinh? ",
+          "state": true
+        },
+        {
+          "id": 3,
+          "name": "Bạn sẽ làm gì nếu bạn là người khác giới trong một tuần?",
+          "state": true
+        },
+        {
+          "id": 4,
+          "name": "Điều điên rồ nhất bạn đã làm trên phương tiện giao thông công cộng là gì?",
+          "state": true
+        },
+        {
+          "id": 5,
+          "name": "Trong số tất cả những người trong phòng, bạn sẽ đồng ý hẹn hò với chàng trai/cô gái nào? ",
+          "state": true
+        },
+        {
+          "id": 6,
+          "name": "Gọi tên một người mà bạn hối hận vì đã hôn.",
+          "state": true
+        }
+      ]
+    },
+    {
+      "id": 0,
+      "title": "Nghịch ngợm",
+      "dare": [
+        {
+          "id": 0,
+          "name": "Trao đổi một mặt hàng quần áo với người chơi ở bên phải của bạn.",
+          "state": true
+        },
+        {
+          "id": 1,
+          "name": "Tập plank trong một phút.",
+          "state": true
+        },
+        {
+          "id": 2,
+          "name": "Ngửi bàn chân trần của người chơi khác.",
+          "state": true
+        },
+        {
+          "id": 3,
+          "name": "Chọn một người nào đó trong nhóm để đánh đòn cho bạn",
+          "state": true
+        },
+        {
+          "id": 4,
+          "name": "Mở Instagram hoặc Facebook của bạn và thích từng bài đăng của người yêu cũ.",
+          "state": true
+        },
+        {
+          "id": 5,
+          "name": "ãy thực hiện tư thế yoga kỳ lạ nhất mà bạn từng thực hiện.",
+          "state": true
+        }
+      ],
+      "truth": [
+        {
+          "id": 0,
+          "name": "Bạn có một biệt danh thời thơ ấu đáng xấu hổ?",
+          "state": true
+        },
+        {
+          "id": 1,
+          "name": "Bạn đã có một khoảnh khắc xấu hổ trước trường học?",
+          "state": true
+        },
+        {
+          "id": 2,
+          "name": "hhhhhhhh",
+          "state": true
+        },
+        {
+          "id": 3,
+          "name": "hhhhhhhh",
+          "state": true
+        },
+        {
+          "id": 4,
+          "name": "hhhhhhhh",
+          "state": true
+        },
+        {
+          "id": 5,
+          "name": "hhhhhhhh",
+          "state": true
+        }
+      ]
+    }
+  ]
+}
