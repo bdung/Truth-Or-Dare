@@ -21,9 +21,17 @@ class MainApp extends StatelessWidget {
         // textTheme: Theme.of(context).textTheme.apply(bodyColor: kTextColor),
         // visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const Scaffold(
-        body: HomeScreen(),
-      ),
+      initialRoute: '/start',
+      onGenerateRoute: (settings){
+        switch(settings.name){
+          case '/start':
+            return MaterialPageRoute(builder: (context) => const BeginScreen());
+          case '/home':
+            return MaterialPageRoute(builder: (context) => const HomeScreen());
+          default:
+            return null;
+        }
+      },
     );
   }
 }

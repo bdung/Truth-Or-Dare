@@ -45,14 +45,9 @@ class _BeginScreenState extends State<BeginScreen> {
             width: MediaQuery.sizeOf(context).width * 0.7,
             height: MediaQuery.sizeOf(context).height * 0.07,
             child: ElevatedButton(
-                child: Text(
-                  "BẮT ĐẦU",
-                  style: TextStyle(
-                      color: kTextWhiteColor, fontFamily: defaultFontFamily),
-                ),
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()));
+                      MaterialPageRoute(builder: (context) => const HomeScreen()));
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: kPrimaryColor,
@@ -60,6 +55,11 @@ class _BeginScreenState extends State<BeginScreen> {
                       fontWeight: FontWeight.bold, fontSize: 30),
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(15))),
+                ),
+                child: const Text(
+                  "BẮT ĐẦU",
+                  style: TextStyle(
+                      color: kTextWhiteColor, fontFamily: defaultFontFamily),
                 )),
           ),
         ],

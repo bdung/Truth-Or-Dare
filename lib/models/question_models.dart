@@ -1,18 +1,21 @@
 class Dare {
   int? id;
   String? name;
+  bool? state;
 
-  Dare({this.id, this.name});
+  Dare({this.id, this.name, this.state});
 
   Dare.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
+    state = json['state'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
     data['id'] = id;
     data['name'] = name;
+    data['state'] = state;
     return data;
   }
 }
@@ -20,18 +23,22 @@ class Dare {
 class Truth {
   int? id;
   String? name;
+  bool? state;
 
-  Truth({this.id, this.name});
+  Truth({this.id, this.name, this.state});
 
   Truth.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
+    state = json['state'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
     data['id'] = id;
     data['name'] = name;
+    data['state'] = state;
+
     return data;
   }
 }

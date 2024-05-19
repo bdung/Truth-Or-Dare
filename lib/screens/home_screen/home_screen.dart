@@ -6,7 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:truth_or_dare/constant.dart';
 import 'package:truth_or_dare/models/question_models.dart';
-import 'package:truth_or_dare/screens/question_screen/list_item_question.dart';
+
+import '../question_screen/list_item_question.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,18 +17,88 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Data> allDatas = [];
+  List<Data> allData = [];
+  final TextEditingController _titleTopic = TextEditingController();
+  bool isLoading = true;
 
-  Future<void> readJsonFile() async {
-    final String response = await rootBundle.loadString('lib/assets/data.json');
-    final data = await json.decode(response);
+  bool isFileExists(String filePath) {
+    File file = File(filePath);
+    return file.existsSync();
+  }
 
-    var list = data["Data"] as List<dynamic>;
+  Future<void> handlReadFilCustomer(bool isReset) async {
+    String currentDirectoryPath = Directory.systemTemp.path;
+    if (!File('$currentDirectoryPath/dataCustomer.json').existsSync() ||
+        isReset) {
+      readJsonFile('lib/assets/data.json').then((_) => {
+            if (isReset) {writeJsonFile()}
+          });
+    } else {
+      readJsonFile('$currentDirectoryPath/dataCustomer.json');
+    }
+  }
 
-    setState(() {
-      allDatas = [];
-      allDatas = list.map((e) => Data.fromJson(e)).toList();
+  Future<void> readJsonFile(String pathFile) async {
+    try {
+      final String response = await rootBundle.loadString(pathFile);
+      final data = await json.decode(response);
+
+      var list = data["Data"] as List<dynamic>;
+
+      setState(() {
+        allData.clear();
+        allData = list.map((e) => Data.fromJson(e)).toList();
+        isLoading = false;
+      });
+    } catch (e) {
+      print("Error reading JSON file: $e");
+    }
+  }
+
+  List<Map<String, dynamic>> dataListToJson(List<Data> dataList) {
+    List<Map<String, dynamic>> jsonList = [];
+    dataList.forEach((data) {
+      jsonList.add(data.toJson());
     });
+    return jsonList;
+  }
+
+  Future<void> writeJsonFile() async {
+    try {
+      String currentDirectoryPath = Directory.systemTemp.path;
+
+      final file = File('${currentDirectoryPath}/dataCustomer.json');
+      List<Map<String, dynamic>> jsonDataList = dataListToJson(allData);
+      final jsonData = jsonEncode({'Data': jsonDataList});
+      await file.writeAsString(jsonData);
+      print('Data written to file successfully');
+    } catch (e) {
+      print('Error writing to file: $e');
+    }
+  }
+
+  Future<void> insertTopic() async {
+    try {
+      if (!_titleTopic.text.isEmpty) {
+        Data dataNew = Data(
+            id: allData.length, title: _titleTopic.text, dare: [], truth: []);
+        int index = allData.length;
+        setState(() {
+          allData.insert(index, dataNew);
+          _titleTopic.clear();
+          writeJsonFile();
+        });
+      }
+    } catch (e) {
+      print("Error insert JSON file: $e");
+    }
+  }
+
+  @override
+  void initState() {
+    isLoading = true;
+    handlReadFilCustomer(false);
+    super.initState();
   }
 
   Future<String> get _directoryPath async {
@@ -36,35 +107,18 @@ class _HomeScreenState extends State<HomeScreen> {
     return directory.path;
   }
 
-  Future<void> writeJsonFile() async {
-    final Data user = Data(id: 10, title: "User", dare: null, truth: null);
-
-    File file = await _jsonFile;
-    await file.writeAsString(json.encode(user));
-  }
-
-  Future<File> get _jsonFile async {
-    final path = await _directoryPath;
-
-    return File('.../lib/assets/customer.json');
-  }
-
   @override
   Widget build(BuildContext context) {
-    readJsonFile();
-    writeJsonFile();
-    readJsonFile();
-    _showMessageDialog(BuildContext context) => showDialog(
+    showMessageDialog(BuildContext context) => showDialog(
         context: context,
         builder: (context) => AlertDialog(
               backgroundColor: kPrimaryColor.withOpacity(0.8),
-              title: Text(
+              title: const Text(
                 'Thêm chủ đề mới',
                 style: TextStyle(color: kTextWhiteColor),
               ),
-              content: Expanded(
-                  child: Container(
-                padding: EdgeInsets.only(
+              content: Container(
+                padding: const EdgeInsets.only(
                     left: kDefaultPadding / 2, right: kDefaultPadding / 2),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
@@ -72,24 +126,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   boxShadow: [
                     BoxShadow(
                       color: kColorHidden.withOpacity(0.2),
-                      offset: Offset(0, 4),
+                      offset: const Offset(0, 4),
                       blurRadius: 4,
                     ),
                   ],
                 ),
                 child: TextField(
-                  scrollPadding: EdgeInsets.all(kDefaultPadding / 2),
+                  controller: _titleTopic,
+                  scrollPadding: const EdgeInsets.all(kDefaultPadding / 2),
                   enabled: true,
                   cursorColor: kButtonColor,
                 ),
-              )),
+              ),
               actions: [
                 Center(
                   child: ElevatedButton(
-                    child: Text(
-                      'Thêm mới',
-                      style: TextStyle(color: kTextWhiteColor),
-                    ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: kButtonColor,
                       textStyle: const TextStyle(
@@ -97,7 +148,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(15))),
                     ),
-                    onPressed: () => Navigator.of(context).pop(),
+                    onPressed: () {
+                      insertTopic();
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text(
+                      'Thêm mới',
+                      style: TextStyle(color: kTextWhiteColor),
+                    ),
                   ),
                 )
               ],
@@ -106,11 +164,11 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          SizedBox(
+          const SizedBox(
             height: 50,
           ),
           Container(
-            padding: EdgeInsets.only(right: 10, left: 10),
+            padding: const EdgeInsets.only(right: 10, left: 10),
             alignment: Alignment.center,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
@@ -118,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
               boxShadow: [
                 BoxShadow(
                   color: kColorHidden.withOpacity(0.2),
-                  offset: Offset(0, 4),
+                  offset: const Offset(0, 4),
                   blurRadius: 4,
                 ),
               ],
@@ -127,7 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.arrow_back,
                     color: kButtonColor,
                   ),
@@ -135,7 +193,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.pop(context);
                   },
                 ),
-                Text(
+                const Text(
                   "Truth or Dare",
                   style: TextStyle(
                       color: kTextLightColor,
@@ -144,56 +202,110 @@ class _HomeScreenState extends State<HomeScreen> {
                       fontWeight: FontWeight.bold),
                 ),
                 IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.add,
                     color: kButtonColor,
                   ),
                   onPressed: () {
-                    _showMessageDialog(context);
+                    showMessageDialog(context);
                   },
                 ),
               ],
             ),
           ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: allDatas.length,
-              itemBuilder: ((context, index) {
-                return Column(
-                  children: [
-                    SizedBox(
-                      height: 20,
-                    ),
-                    SizedBox(
-                        width: MediaQuery.sizeOf(context).width * 0.8,
-                        height: MediaQuery.sizeOf(context).height * 0.2,
-                        child: ElevatedButton(
-                            child: Text(
-                              allDatas[index].title.toString(),
-                              style: TextStyle(
-                                  color: kTextWhiteColor,
-                                  fontFamily: defaultFontFamily),
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ListItemQuestion(
-                                          data: allDatas[index])));
-                            },
+          isLoading
+              ? const CircularProgressIndicator()
+              : Expanded(
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: allData.length,
+                          itemBuilder: ((context, index) {
+                            return Column(
+                              children: [
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                SizedBox(
+                                  width: MediaQuery.sizeOf(context).width * 0.8,
+                                  height:
+                                      MediaQuery.sizeOf(context).height * 0.2,
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ListItemQuestion(
+                                            data: allData[index],
+                                            writeJsonFile: writeJsonFile,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: kPrimaryColor,
+                                      textStyle: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 28,
+                                      ),
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(15),
+                                        ),
+                                      ),
+                                    ),
+                                    child: Text(
+                                      allData[index].title!,
+                                      style: const TextStyle(
+                                        color: kTextWhiteColor,
+                                        fontFamily: defaultFontFamily,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+                          }),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            bottom: kDefaultPadding * 3,
+                            top: kDefaultPadding * 3),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          height: 50,
+                          child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: kPrimaryColor,
+                              backgroundColor: kButtonColor,
                               textStyle: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 28),
+                                  fontWeight: FontWeight.bold, fontSize: 20),
                               shape: const RoundedRectangleBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(15))),
-                            ))),
-                  ],
-                );
-              }),
-            ),
-          )
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                handlReadFilCustomer(true);
+                              });
+                            },
+                            child: const Center(
+                              child: Text(
+                                'Load lại dữ liệu ban đầu',
+                                style: TextStyle(color: kTextWhiteColor),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
         ],
       ),
     );
