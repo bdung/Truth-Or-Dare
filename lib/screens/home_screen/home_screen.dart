@@ -8,6 +8,7 @@ import 'package:truth_or_dare/constant.dart';
 import 'package:truth_or_dare/models/question_models.dart';
 
 import '../question_screen/list_item_question.dart';
+import 'package:path_provider/path_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -27,14 +28,14 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> handlReadFilCustomer(bool isReset) async {
-    String currentDirectoryPath = Directory.systemTemp.path;
-    if (!File('$currentDirectoryPath/dataCustomer.json').existsSync() ||
-        isReset) {
+    Directory directory = await getApplicationDocumentsDirectory();
+    String filePath = '${directory.path}/dataCustomer.json';
+    if (!File('$filePath').existsSync() || isReset) {
       readJsonFile('lib/assets/data.json').then((_) => {
             if (isReset) {writeJsonFile()}
           });
     } else {
-      readJsonFile('$currentDirectoryPath/dataCustomer.json');
+      readJsonFile('$filePath');
     }
   }
 
@@ -65,9 +66,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> writeJsonFile() async {
     try {
-      String currentDirectoryPath = Directory.systemTemp.path;
+      Directory directory = await getApplicationDocumentsDirectory();
+      String filePath = '${directory.path}/dataCustomer.json';
 
-      final file = File('${currentDirectoryPath}/dataCustomer.json');
+      final file = File(filePath);
       List<Map<String, dynamic>> jsonDataList = dataListToJson(allData);
       final jsonData = jsonEncode({'Data': jsonDataList});
       await file.writeAsString(jsonData);
