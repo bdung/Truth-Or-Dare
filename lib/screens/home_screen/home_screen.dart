@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:truth_or_dare/constant.dart';
 import 'package:truth_or_dare/models/question_models.dart';
 import 'package:truth_or_dare/screens/question_screen/list_item_question.dart';
@@ -28,8 +30,29 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  Future<String> get _directoryPath async {
+    Directory directory = await getApplicationDocumentsDirectory();
+    print("directory path: " + directory.path);
+    return directory.path;
+  }
+
+  Future<void> writeJsonFile() async {
+    final Data user = Data(id: 10, title: "User", dare: null, truth: null);
+
+    File file = await _jsonFile;
+    await file.writeAsString(json.encode(user));
+  }
+
+  Future<File> get _jsonFile async {
+    final path = await _directoryPath;
+
+    return File('.../lib/assets/customer.json');
+  }
+
   @override
   Widget build(BuildContext context) {
+    readJsonFile();
+    writeJsonFile();
     readJsonFile();
     _showMessageDialog(BuildContext context) => showDialog(
         context: context,

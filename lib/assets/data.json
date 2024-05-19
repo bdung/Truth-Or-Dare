@@ -47,6 +47,26 @@
 			{
 			  "id" : 10,
 			  "name": "La lớn tôi bị điên 3 tiếng"
+			},
+			{
+			  "id" : 11,
+			  "name": "Ngậm 03 viên đá trong miệng đến khi đá tan hết."
+			},
+			{
+			  "id" : 12,
+			  "name": "Những người trong phòng chọn ra 03 loại chất lỏng, trộn vào 1 ly và bạn phải uống cạn ly đó."
+			},
+			{
+			  "id" : 13,
+			  "name": "Đăng tấm ảnh cũ nhất trong máy bạn lên story."
+			},
+			{
+			  "id" : 14,
+			  "name": "Gọi cho một người bạn, giả vờ như hôm nay là sinh nhật họ và hát Happy Birthday, xem phản ứng của họ."
+			},
+			{
+			  "id" : 15,
+			  "name": "Làm 03 kiểu mặt hề để mọi người chụp lại."
 			}
 		  ],
 		  "truth": [
@@ -77,6 +97,38 @@
 			{
 			  "id" : 7,
 			  "name": "Gọi tên một người mà bạn hối hận vì đã hôn."
+			},
+			{
+			  "id" : 8,
+			  "name": "Cho cả phòng thấy bức ảnh xấu hổ nhất trong điện thoại bạn."
+			},
+			{
+			  "id" : 9,
+			  "name": "Vì sao bạn chia tay với người yêu cũ gần nhất?"
+			},
+			{
+			  "id" : 10,
+			  "name": "Lí do ấu trĩ nhất khiến bạn lên sổ đầu bài thời còn đi học là gì?"
+			},
+			{
+			  "id" : 11,
+			  "name": "Bạn cảm nhận thế nào về nụ hôn đầu của mình?"
+			},
+			{
+			  "id" : 12,
+			  "name": "Bạn từng thích người yêu của bạn bạn chưa?"
+			},
+			{
+			  "id" : 13,
+			  "name": "Điều xấu hổ nhất bạn từng làm ở nơi công cộng."
+			},
+			{
+			  "id" : 14,
+			  "name": "Kể về một lần bạn cảm thấy bị sỉ nhục."
+			},
+			{
+			  "id" : 15,
+			  "name": "Kể một sự thật xấu hổ của bạn mà cả đám chưa biết."
 			}
 		  ]
 	},
@@ -106,34 +158,106 @@
 		  },
 		  {
 			"id" : 6,
-			"name": "ãy thực hiện tư thế yoga kỳ lạ nhất mà bạn từng thực hiện."
+			"name": "Hãy thực hiện tư thế yoga kỳ lạ nhất mà bạn từng thực hiện."
+		  },
+		  {
+			"id" : 7,
+			"name": "Đưa điện thoại cho người ngồi bên trái bạn và cho phép họ nhắn 01 tin nhắn cho bất kì ai họ muốn."
+		  },
+		  {
+			"id" : 8,
+			"name": "Đặt một chiếc giày lên đầu. Một người khác trong phòng chụp ảnh lại và post lên MXH."
+		  },
+		  {
+			"id" : 9,
+			"name": "Gửi tin nhắn tỏ tình cho một người bất kì mà cả phòng lựa chọn."
+		  },
+		  {
+			"id" : 10,
+			"name": "Để mọi người trong phòng tạo kiểu tóc cho bạn và giữ đến khi hết 3 vòng."
+		  },
+		  {
+			"id" : 11,
+			"name": "Đăng một status tán tỉnh một người trong phòng do mọi người chỉ định."
+		  },
+		  {
+			"id" : 12,
+			"name": "Ngậm đầy nước trong miệng. Cả bàn chọc bạn cười trong 1 phút. Nếu bạn không cười cả bàn bị phạt và ngược lại."
+		  },
+		  {
+			"id" : 13,
+			"name": "Đeo giày của người được chỉ định lên cổ và post ảnh đó lên story."
+		  },
+		  {
+			"id" : 14,
+			"name": "Ghi âm bạn hát một đoạn nhạc và để người bên phải quyết định gửi đoạn ghi âm đó cho ai."
+		  },
+		  {
+			"id" : 15,
+			"name": "Gọi cho crush gần đây nhất và hát một bài hát, không giải thích gì thêm."
 		  }
 		],
 		"truth": [
-		  {
-			"id" : 1,
-			"name": "Bạn có một biệt danh thời thơ ấu đáng xấu hổ?"
-		  },
-		  {
-			"id" : 2,
-			"name": "Bạn đã có một khoảnh khắc xấu hổ trước trường học?"
-		  },
-		  {
-			"id" : 3,
-			"name": "hhhhhhhh"
-		  },
-		  {
-			"id" : 4,
-			"name": "hhhhhhhh"
-		  },
-		  {
-			"id" : 5,
-			"name": "hhhhhhhh"
-		  },
-		  {
-			"id" : 6,
-			"name": "hhhhhhhh"
-		  }
+			{
+				"id" : 1,
+				"name": "Kể về một lần bạn gian lận trong thi cử."
+			  },
+			  {
+				"id" : 2,
+				"name": "Một nickname khiến bạn xấu hổ nhất mà người khác từng đặt cho bạn."
+			  },
+			  {
+				"id" : 3,
+				"name": "Một thói quen từ khi bạn còn nhỏ nhưng lớn lên bạn phát hiện nó thật kì lạ?"
+			  },
+			  {
+				"id" : 4,
+				"name": "Bạn từng viết thư tình/ nhận được thư tình từ ai chưa?"
+			  },
+			  {
+				"id" : 5,
+				"name": "Một điều bạn từng nối dối chỉ để ngầu hơn trước người khác."
+			  },
+			  {
+				"id" : 6,
+				"name": "Người gần đây nhất khiến bạn khóc là ai? Vì điều gì?"
+			  },
+			  {
+				"id" : 7,
+				"name": "Nếu bạn phải hẹn hò với một người trong phòng (khác giới tính), bạn sẽ chọn ai?"
+			  },
+			  {
+				"id" : 8,
+				"name": "Bạn tửng say xỉn đến mức không biết đất trời bao giờ chưa?"
+			  },
+			  {
+				"id" : 9,
+				"name": "Một thứ xấu hổ bạn từng đăng lên MXH?"
+			  },
+			  {
+				"id" : 10,
+				"name": "Kể về một điều ngu ngốc bạn từng làm."
+			  },
+			  {
+				"id" : 11,
+				"name": "Nụ hôn tồi tệ nhất của bạn là ai?"
+			  },
+			  {
+				"id" : 12,
+				"name": "Hãy tiết lộ một điều bạn nghĩ chưa ai biết về bạn."
+			  },
+			  {
+				"id" : 13,
+				"name": "Bạn đã bao giờ thử hút thuốc lá/vape chưa?"
+			  },
+			  {
+				"id" : 14,
+				"name": "Vì sao bạn chia tay với người yêu cũ gần nhất?"
+			  },
+			  {
+				"id" : 15,
+				"name": "Bạn cảm nhận thế nào về nụ hôn đầu của mình?"
+			  }
 		]
   }
 	]
