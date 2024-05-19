@@ -112,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
     showMessageDialog(BuildContext context) => showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              backgroundColor: kPrimaryColor.withOpacity(0.8),
+              backgroundColor: kPrimaryColor,
               title: const Text(
                 'Thêm chủ đề mới',
                 style: TextStyle(color: kTextWhiteColor),
