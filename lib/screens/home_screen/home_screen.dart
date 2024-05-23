@@ -30,14 +30,16 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> handlReadFilCustomer(bool isReset) async {
     Directory directory = await getApplicationDocumentsDirectory();
     String filePath = '${directory.path}/dataCustomer.json';
-    if (!File('$filePath').existsSync() || isReset) {
+    print(File(filePath).lengthSync().toString());
+    if (!File('$filePath').existsSync() || File(filePath).lengthSync() == 1 || isReset) {
       readJsonFile('lib/assets/data.json')
           .then((_)=>{
-            if(isReset){
-              writeJsonFile()
-            }
+        if(isReset || File(filePath).lengthSync() == 1){
+          writeJsonFile()
+        }
       });
     } else {
+      print('ok');
       readJsonFile('$filePath');
     }
   }
