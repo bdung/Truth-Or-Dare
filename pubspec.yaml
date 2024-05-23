@@ -10,6 +10,7 @@ dependencies:
     flutter:
         sdk: flutter
     google_fonts: ^6.2.1
+    path_provider: ^2.1.3
 
 dev_dependencies:
     flutter_test:
@@ -21,3 +22,4 @@ flutter:
     assets:
         - lib/assets/
         - lib/assets/data.json
+        - lib/assets/customer.json

@@ -9,7 +9,6 @@ import 'package:truth_or_dare/models/question_models.dart';
 import '../question_screen/list_item_question.dart';
 import 'package:path_provider/path_provider.dart';
 
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -39,7 +38,6 @@ class _HomeScreenState extends State<HomeScreen> {
         }
       });
     } else {
-      print('ok');
       readJsonFile('$filePath');
     }
   }
@@ -111,12 +109,18 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
+  Future<String> get _directoryPath async {
+    Directory directory = await getApplicationDocumentsDirectory();
+    print("directory path: " + directory.path);
+    return directory.path;
+  }
+
   @override
   Widget build(BuildContext context) {
     showMessageDialog(BuildContext context) => showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              backgroundColor: kPrimaryColor.withOpacity(0.8),
+              backgroundColor: kPrimaryColor,
               title: const Text(
                 'Thêm chủ đề mới',
                 style: TextStyle(color: kTextWhiteColor),
@@ -220,92 +224,96 @@ class _HomeScreenState extends State<HomeScreen> {
           isLoading
               ? const CircularProgressIndicator()
               : Expanded(
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 20,
-                ),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: allData.length,
-                    itemBuilder: ((context, index) {
-                      return Column(
-                        children: [
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          SizedBox(
-                            width: MediaQuery.sizeOf(context).width * 0.8,
-                            height: MediaQuery.sizeOf(context).height * 0.2,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ListItemQuestion(
-                                      data: allData[index],
-                                      writeJsonFile: writeJsonFile,
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: allData.length,
+                          itemBuilder: ((context, index) {
+                            return Column(
+                              children: [
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                SizedBox(
+                                  width: MediaQuery.sizeOf(context).width * 0.8,
+                                  height:
+                                      MediaQuery.sizeOf(context).height * 0.2,
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ListItemQuestion(
+                                            data: allData[index],
+                                            writeJsonFile: writeJsonFile,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: kPrimaryColor,
+                                      textStyle: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 28,
+                                      ),
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(15),
+                                        ),
+                                      ),
+                                    ),
+                                    child: Text(
+                                      allData[index].title!,
+                                      style: const TextStyle(
+                                        color: kTextWhiteColor,
+                                        fontFamily: defaultFontFamily,
+                                      ),
                                     ),
                                   ),
-                                );
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: kPrimaryColor,
-                                textStyle: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 28,
                                 ),
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(15),
-                                  ),
-                                ),
-                              ),
+                              ],
+                            );
+                          }),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            bottom: kDefaultPadding * 3,
+                            top: kDefaultPadding * 3),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          height: 50,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: kButtonColor,
+                              textStyle: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20),
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15))),
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                handlReadFilCustomer(true);
+                              });
+                            },
+                            child: const Center(
                               child: Text(
-                                allData[index].title!,
-                                style: const TextStyle(
-                                  color: kTextWhiteColor,
-                                  fontFamily: defaultFontFamily,
-                                ),
+                                'Load lại dữ liệu ban đầu',
+                                style: TextStyle(color: kTextWhiteColor),
                               ),
                             ),
                           ),
-                        ],
-                      );
-                    }),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: kDefaultPadding*3, top: kDefaultPadding*3),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    height: 50,
-                    child:  ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: kButtonColor,
-                          textStyle: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
-                          shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(15))),
                         ),
-                        onPressed: (){
-                          setState(() {
-                            handlReadFilCustomer(true);
-                          });
-                        },
-                        child:const Center(
-                          child: Text(
-                            'Load lại dữ liệu ban đầu',
-                            style: TextStyle(color: kTextWhiteColor),
-                          ),
-                        ),
-                    ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            ),
-          )
-
+                )
         ],
       ),
     );
